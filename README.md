@@ -100,15 +100,27 @@ sudo adduser hadoop sudo
             <name>yarn.resourcemanager.hostname</name>
             <value>mi-msi</value>
     </property>
-<property>
+    <property>
         <name>yarn.nodemanager.aux-services</name>
         <value>mapreduce_shuffle</value>
     </property>
-<property>
+    <property>
     <name>yarn.nodemanager.vmem-check-enabled</name>
     <value>false</value>
     <description>Whether virtual memory limits will be enforced for containers</description>
-</property>
+    </property>
+    <property>
+            <name>yarn.resourcemanager.address</name>
+            <value>mi-msi:8032</value>
+    </property>
+    <property>
+            <name>yarn.resourcemanager.scheduler.address</name>
+            <value>mi-msi:8030</value>
+    </property>
+    <property>
+            <name>yarn.resourcemanager.resource-tracker.address</name>
+            <value>mi-msi:8031</value>
+    </property>
 </configuration>
 ```
 
@@ -169,8 +181,22 @@ hadoop@mi-msi
 hadoop@igudesman-2x
 ```
 
+4. The result of the command  `hdfs dfsadmin -report`
+
+<img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/hdfs_dfsadmin.png"/>
+
+HDFS is up on 2 hosts.
+
+5. We downloaded data into HDFS
+
+<img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/hdfs_download_data.png"/>
+
 ## Results Analysis
+We tried different values of rank in the model:
+
 <img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/graph_rank_error.png"/>
+
+According to graph, models with rank higher 10 are overfitting. Model with rank 10 produces lowest error after training, therefore, 10 is the optimal value for rank.
 
 ## Conclusion <a name="conclusion"></a>
 Our team successfully implemented the movie reccomendation system and run it on 2 different computers.
