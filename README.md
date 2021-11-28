@@ -103,6 +103,7 @@ Then, we execute the following command to submit a job to a cluster:
 ```bash
 spark-submit --master yarn spark-recommendation.jar hdfs:///movielens-mod -user false
 ```
+where *spark-recommendation.jar* is name of compiled job file.
 Job is successfully submitted to the cluster:
 <img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/vm-job-run.png"/>
 And also finished successfully, outputting the prediction:
