@@ -53,31 +53,32 @@ object MovieLensALS {
     // train a matrix factorization model
     // user should be in training data split. otherwise preference prediction is impossible
     // two parameters are rank (specifies complexity) and iterations
-    val ranks = Array(60)
-    var best_params = Array(10, Double.PositiveInfinity)
 
-    for( r <- ranks ) {
-      println(s"Rank: ${r}")
-      val model = ALS.train(train.union(myRating), r, 10)
-
-      // https://spark.apache.org/docs/2.3.2/api/java/org/apache/spark/mllib/recommendation/MatrixFactorizationModel.html#predict-org.apache.spark.rdd.RDD-
-      val prediction = model.predict(test.map(x => (x.user, x.product)))
-
-      // calculate validation error
-      val recommenderRmse = rmse(test, prediction)
-      println(s"Error after training: ${recommenderRmse}")
-
-      // if baseline is implemented, calculate baseline error
-      if (baseline.nonEmpty) {
-        val baselineRmse = rmse(test, baseline)
-        println(s"Baseline error: ${baselineRmse}")
-      }
-
-      if (recommenderRmse < best_params(1)) {
-        best_params = Array(r, recommenderRmse)
-      }
-      println("\n")
-    }
+//    val ranks = Array(60)
+      var best_params = Array(10, Double.PositiveInfinity)
+//
+//    for( r <- ranks ) {
+//      println(s"Rank: ${r}")
+//      val model = ALS.train(train.union(myRating), r, 10)
+//
+//      // https://spark.apache.org/docs/2.3.2/api/java/org/apache/spark/mllib/recommendation/MatrixFactorizationModel.html#predict-org.apache.spark.rdd.RDD-
+//      val prediction = model.predict(test.map(x => (x.user, x.product)))
+//
+//      // calculate validation error
+//      val recommenderRmse = rmse(test, prediction)
+//      println(s"Error after training: ${recommenderRmse}")
+//
+//      // if baseline is implemented, calculate baseline error
+//      if (baseline.nonEmpty) {
+//        val baselineRmse = rmse(test, baseline)
+//        println(s"Baseline error: ${baselineRmse}")
+//      }
+//
+//      if (recommenderRmse < best_params(1)) {
+//        best_params = Array(r, recommenderRmse)
+//      }
+//      println("\n")
+//    }
 
     // the best model
     val model = ALS.train(train.union(myRating), best_params(0).toInt, 10)
