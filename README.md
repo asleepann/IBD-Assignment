@@ -227,6 +227,16 @@ HDFS is up on 2 hosts.
 
 <img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/hdfs_download_data.png"/>
 
+6. We ran HDFS and YARN
+
+<img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/hd.png"/>
+<img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/ig.jpg"/>
+
+7. We started execution and get following result for both modes (grader and non-grader)
+
+<img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/res.png"/>
+<img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/res2.png"/>
+
 ## Results Analysis <a name="results-analysis"></a>
 We tried different values of rank in the model:
 
