@@ -50,6 +50,8 @@ object MovieLensALS {
     val Array(train, test) = ratingsData.randomSplit(Array(0.9, 0.1), seed=42L)
     val baseline = makeBaseline(ratingsData)
 
+    // hyper-parameter RANK fine-tuning.
+    // Commeneted as not needed for a single train/test mode
     // train a matrix factorization model
     // user should be in training data split. otherwise preference prediction is impossible
     // two parameters are rank (specifies complexity) and iterations
@@ -90,7 +92,7 @@ object MovieLensALS {
 
     // calculate validation error
     val recommenderRmse = rmse(test, prediction)
-    //println(s"Error after training: ${recommenderRmse}")
+    println(s"Error after training: ${recommenderRmse}")
     //
     //    // if baseline is implemented, calculate baseline error
     if (baseline.nonEmpty) {
