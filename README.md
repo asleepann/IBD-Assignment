@@ -74,8 +74,11 @@ if (load_movie_preferences) {
       .collect()
       .toSeq
 ```
+
 ## Private Network Hadoop Cluster Configuration <a name="hadoop-cluster"></a>
-1. Configuring hostnames
-<img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/local_net.png" />
+Configuring hostnames
+<img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/local_net.png"/> 
+Add hadoop user
+<img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/add_hadoop_user.png"/>
 
 ## Conclusion <a name="conclusion"></a>
