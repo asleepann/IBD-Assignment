@@ -88,7 +88,9 @@ sudo adduser hadoop sudo
 ```
 <img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/add_hadoop_user.png"/>
 3. d
-4. 
+
+## Results Analysis
+<img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/graph_rank_error.png"/>
 
 ## Conclusion <a name="conclusion"></a>
 Our team successfully implemented the movie reccomendation system and run it on 2 different computers.
