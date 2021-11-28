@@ -94,7 +94,7 @@ start-yarn.sh
 ```
 Our cluster of VM's is working now.
 We can see there are 3 nodes running in distributed file system:
-<img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/vm-hdfs3nodes.png"/>
+<img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/vm-hdfs-3nodes.png"/>
 We uploaded all required data to the cluster then:
 <img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/vm-hdfs-files.png"/>
 Hadoop Cluster also shows 3 working nodes:
@@ -104,7 +104,7 @@ Then, we execute the following command to submit a job to a cluster:
 spark-submit --master yarn spark-recommendation.jar hdfs:///movielens-mod -user false
 ```
 Job is successfully submitted to the cluster:
-<img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/vm-job-run"/>
+<img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/vm-job-run.png"/>
 And also finished successfully, outputting the prediction:
 <img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/vm-job-result.png"/>
 
