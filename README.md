@@ -24,6 +24,12 @@ This report covers all the steps that we performed and that lead us to a success
 
 ## System description <a name="system-description"></a>
 
+We were given part of the code, so we only list here important changes we applied.
+
+In general, the datasets with users, watched film and their rating is provided. System is to learn on this data and to predict rating for other users and films.
+
+
+We also perform fine-tuning of parameters: we try different *rank* for our model to see what is the best. The best result is discussed at the end of the report.
 ```scala
 val ranks = Array(2, 5, 10, 20, 30, 40, 50, 60)
     var best_params = Array(10, Double.PositiveInfinity)
@@ -50,6 +56,7 @@ val ranks = Array(2, 5, 10, 20, 30, 40, 50, 60)
     }
 ```
 
+We filter out films that user already watched, so they are not shown in recommendations:
 ```scala
 println("Predictions for user with filtering\n")
       val already_watched = myRating.map(x => x.product).collect()
@@ -66,6 +73,7 @@ println("Predictions for user with filtering\n")
         .foreach(x => println(s"${filmId2Title(x.product)}\t\t${x.rating}"))
 ```
 
+We also let the user choose: if load_movie_preferences is true, they are automatically read from user_ratings.tsv file. Otherwise, user is prompted to rate movies at the start of the program.
 ```scala
 if (load_movie_preferences) {
     graded = sc.textFile(path + "/user_ratings.tsv")
