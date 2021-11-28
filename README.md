@@ -78,7 +78,9 @@ if (load_movie_preferences) {
 ## Private Network Hadoop Cluster Configuration <a name="hadoop-cluster"></a>
 Steps of configuring local network for running our movie recommendation system on 2 computers both connnected to the same Wi-Fi:
 1. Configuring hostnames:
-<img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/local_net.png"/> 
+
+<img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/local_net.png"/>
+
 2. Add "hadoop" user to the system using the following commands:
 
 ```bash
@@ -87,7 +89,85 @@ sudo passwd hadoop
 sudo adduser hadoop sudo
 ```
 <img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/add_hadoop_user.png"/>
-3. d
+
+3. Hadoop configuration files should contain the following:
+ 
+* `yarn-site.xml`
+
+```xml
+<configuration>
+    <property>
+            <name>yarn.resourcemanager.hostname</name>
+            <value>mi-msi</value>
+    </property>
+<property>
+        <name>yarn.nodemanager.aux-services</name>
+        <value>mapreduce_shuffle</value>
+    </property>
+<property>
+    <name>yarn.nodemanager.vmem-check-enabled</name>
+    <value>false</value>
+    <description>Whether virtual memory limits will be enforced for containers</description>
+</property>
+</configuration>
+```
+
+* `core-site.xml`
+
+```xml
+<configuration>
+    <property>
+        <name>fs.default.name</name>
+        <value>hdfs://mi-msi:9000</value>
+    </property>
+</configuration>
+```
+
+* `hdfs-site.xml`
+
+```xml
+<configuration>
+    <property>
+        <name>hadoop.tmp.dir</name>
+        <value>/home/hadoop/hadoop_tmp</value>
+    </property>
+
+    <property>
+        <name>dfs.replication</name>
+        <value>1</value>
+    </property>
+</configuration>
+```
+
+* `mapred-site.xml`
+
+```xml
+<configuration>
+    <property>
+            <name>mapreduce.framework.name</name>
+            <value>yarn</value>
+    </property>
+    <property>
+            <name>yarn.app.mapreduce.am.env</name>
+            <value>HADOOP_MAPRED_HOME=/home/hadoop/hadoop</value>
+    </property>
+    <property>
+            <name>mapreduce.map.env</name>
+            <value>HADOOP_MAPRED_HOME=/home/hadoop/hadoop</value>
+    </property>
+    <property>
+           <name>mapreduce.reduce.env</name>
+           <value>HADOOP_MAPRED_HOME=/home/hadoop/hadoop</value>
+    </property>
+</configuration>
+```
+
+* `workers`
+
+```plain text
+hadoop@mi-msi
+hadoop@igudesman-2x
+```
 
 ## Results Analysis
 <img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/graph_rank_error.png"/>
