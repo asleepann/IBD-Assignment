@@ -84,6 +84,29 @@ val ranks = Array(2, 5, 10, 20, 30, 40, 50, 60)
       println("\n")
     }
 ```
+## Local Multiple-VM Cluster Run
+On labs each of us configured local cluster with 3 virtual machines, so we do not provide detailed configuration here.
+
+On a configured cluster, run
+```bash
+start-dfs.sh
+start-yarn.sh
+```
+Our cluster of VM's is working now.
+We can see there are 3 nodes running in distributed file system:
+<img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/vm-hdfs3nodes.png"/>
+We uploaded all required data to the cluster then:
+<img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/vm-hdfs-files.png"/>
+Hadoop Cluster also shows 3 working nodes:
+<img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/vm-3node-working.png"/>
+Then, we execute the following command to submit a job to a cluster:
+```bash
+spark-submit --master yarn spark-recommendation.jar hdfs:///movielens-mod -user false
+```
+Job is successfully submitted to the cluster:
+<img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/vm-job-run"/>
+And also finished successfully, outputting the prediction:
+<img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/vm-job-result.png"/>
 
 ## Private Network Hadoop Cluster Configuration <a name="hadoop-cluster"></a>
 Steps of configuring local network for running our movie recommendation system on 2 computers both connnected to the same Wi-Fi:
