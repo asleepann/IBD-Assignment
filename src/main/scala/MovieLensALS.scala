@@ -13,9 +13,7 @@ object MovieLensALS {
     Logger.getLogger("org.apache.spark").setLevel(Level.ERROR)
 
     // unpack tuple returned by parseArgs
-    //    val (ratingsPath, doGrading) = parseArgs(args)
-    val ratingsPath = "/home/igudesman/IdeaProjects/recomm"
-    val doGrading = false
+    val (ratingsPath, doGrading) = parseArgs(args)
     val load_movie_preferences = true
     // set up environment
 
