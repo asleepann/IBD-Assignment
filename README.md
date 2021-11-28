@@ -13,6 +13,7 @@ Team **Scaladoop**:
 * [Introduction](#introduction)
 * [System description](#system-description)
 * [Private Network Hadoop Cluster Configuration](#hadoop-cluster)
+* [Results Analysis](#results-analysis)
 * [Conclusion](#conclusion)
 
 ## Introduction <a name="introduction"></a>
@@ -200,7 +201,7 @@ HDFS is up on 2 hosts.
 
 <img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/hdfs_download_data.png"/>
 
-## Results Analysis
+## Results Analysis <a name="results-analysis"></a>
 We tried different values of rank in the model:
 
 <img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/graph_rank_error.png"/>
