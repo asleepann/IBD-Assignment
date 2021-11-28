@@ -28,6 +28,34 @@ We were given part of the code, so we only list here important changes we applie
 
 In general, the datasets with users, watched film and their rating is provided. System is to learn on this data and to predict rating for other users and films.
 
+We also let the user choose: if load_movie_preferences is true, they are automatically read from user_ratings.tsv file. Otherwise, user is prompted to rate movies at the start of the program.
+```scala
+if (load_movie_preferences) {
+    graded = sc.textFile(path + "/user_ratings.tsv")
+      .map(line => line.split("\t"))
+      .map(field => (field(0).toInt, field(1).toDouble))
+      .collect()
+      .toSeq
+```
+
+
+We filter out films that user already watched, so they are not shown in recommendations:
+```scala
+println("Predictions for user with filtering\n")
+      val already_watched = myRating.map(x => x.product).collect()
+      // for input data format refer to documentation
+      // get movie ids to rank from baseline map
+      model.predict(sc.parallelize(baseline.keys.map(x => (0, x)).toSeq))
+        // sort by ratings in descending order
+        .sortBy(_.rating, ascending = false)
+        // filter non-watched movies
+        .filter(x => !already_watched.contains(x.product))
+        // take first 20 items
+        .take(20)
+        // print title and predicted rating
+        .foreach(x => println(s"${filmId2Title(x.product)}\t\t${x.rating}"))
+```
+
 
 We also perform fine-tuning of parameters: we try different *rank* for our model to see what is the best. The best result is discussed at the end of the report.
 ```scala
@@ -54,33 +82,6 @@ val ranks = Array(2, 5, 10, 20, 30, 40, 50, 60)
       }
       println("\n")
     }
-```
-
-We filter out films that user already watched, so they are not shown in recommendations:
-```scala
-println("Predictions for user with filtering\n")
-      val already_watched = myRating.map(x => x.product).collect()
-      // for input data format refer to documentation
-      // get movie ids to rank from baseline map
-      model.predict(sc.parallelize(baseline.keys.map(x => (0, x)).toSeq))
-        // sort by ratings in descending order
-        .sortBy(_.rating, ascending = false)
-        // filter non-watched movies
-        .filter(x => !already_watched.contains(x.product))
-        // take first 20 items
-        .take(20)
-        // print title and predicted rating
-        .foreach(x => println(s"${filmId2Title(x.product)}\t\t${x.rating}"))
-```
-
-We also let the user choose: if load_movie_preferences is true, they are automatically read from user_ratings.tsv file. Otherwise, user is prompted to rate movies at the start of the program.
-```scala
-if (load_movie_preferences) {
-    graded = sc.textFile(path + "/user_ratings.tsv")
-      .map(line => line.split("\t"))
-      .map(field => (field(0).toInt, field(1).toDouble))
-      .collect()
-      .toSeq
 ```
 
 ## Private Network Hadoop Cluster Configuration <a name="hadoop-cluster"></a>
