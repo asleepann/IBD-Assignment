@@ -4,9 +4,9 @@
 [Innopolis University](https://innopolis.university/en/) students, Data Science track.
 
 Team **Scaladoop**:
-* Daniil [@igudesman](https://github.com/igudesman) Igudesman, d.igudesman@innopolis.university
-* Mikhail [@Glemhel](https://github.com/Glemhel) Rudakov, m.rudakov@innopolis.university
-* Anna [@asleepann](https://github.com/asleepann) Startseva, a.startseva@innopolis.university
+* Daniil [@igudesman](https://github.com/igudesman) Igudesman, d.igudesman@innopolis.university, programmer
+* Mikhail [@Glemhel](https://github.com/Glemhel) Rudakov, m.rudakov@innopolis.university, programmer
+* Anna [@asleepann](https://github.com/asleepann) Startseva, a.startseva@innopolis.university, report writer
 
 
 ## Table of Contents
@@ -18,7 +18,7 @@ Team **Scaladoop**:
 ## Introduction <a name="introduction"></a>
 Our team, Scaladoop, is going to implement a movie recommendation system that can help you to choose movie to watch!
 
-To practice not only machine learning with Scala, but also the use of distributed systems, we will run our model distributed on 2-3 different machines using Hadoop Cluster and Spark framework for Scala to speed up computations.
+To practice not only machine learning with Scala, but also the use of distributed systems, we will run our model distributed on 2 different machines using Hadoop Cluster and Spark framework for Scala to speed up computations.
 
 This report covers all the steps that we performed and that lead us to a successful achievement of the goal.
 
@@ -76,9 +76,19 @@ if (load_movie_preferences) {
 ```
 
 ## Private Network Hadoop Cluster Configuration <a name="hadoop-cluster"></a>
-Configuring hostnames
+Steps of configuring local network for running our movie recommendation system on 2 computers both connnected to the same Wi-Fi:
+1. Configuring hostnames:
 <img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/local_net.png"/> 
-Add hadoop user
+2. Add "hadoop" user to the system using the following commands:
+
+```bash
+sudo useradd -m hadoop
+sudo passwd hadoop
+sudo adduser hadoop sudo
+```
 <img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/add_hadoop_user.png"/>
+3. d
+4. 
 
 ## Conclusion <a name="conclusion"></a>
+Our team successfully implemented the movie reccomendation system and run it on 2 different computers.
