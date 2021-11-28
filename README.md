@@ -232,7 +232,7 @@ HDFS is up on 2 hosts.
 <img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/hd.png"/>
 <img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/ig.jpg"/>
 
-7. We started execution and get following result for both modes (grader and non-grader)
+7. We started execution and got the following results for both modes (grader and non-grader)
 
 <img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/res.png"/>
 <img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/res2.png"/>
