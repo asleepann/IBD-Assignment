@@ -106,18 +106,21 @@ sudo adduser hadoop sudo
 
 ```xml
 <configuration>
+     <property>
+            <name>yarn.nodemanager.disk-health-checker.min-healthy-disks</name>
+            <value>0.0</value>
+     </property>
+     <property>
+            <name>yarn.nodemanager.disk-health-checker.max-disk-utilization-per-disk-percentage</name>
+            <value>100.0</value>
+    </property>
     <property>
             <name>yarn.resourcemanager.hostname</name>
             <value>mi-msi</value>
     </property>
     <property>
-        <name>yarn.nodemanager.aux-services</name>
-        <value>mapreduce_shuffle</value>
-    </property>
-    <property>
-    <name>yarn.nodemanager.vmem-check-enabled</name>
-    <value>false</value>
-    <description>Whether virtual memory limits will be enforced for containers</description>
+            <name>yarn.resourcemanager.webapp.address</name>
+            <value>mi-msi:8088</value>
     </property>
     <property>
             <name>yarn.resourcemanager.address</name>
@@ -131,6 +134,29 @@ sudo adduser hadoop sudo
             <name>yarn.resourcemanager.resource-tracker.address</name>
             <value>mi-msi:8031</value>
     </property>
+    <property>
+       <name>yarn.nodemanager.aux-services</name>
+       <value>mapreduce_shuffle</value>
+    </property>
+    <property>
+        <name>yarn.acl.enable</name>
+        <value>0</value>
+    </property>
+    <property>
+   <name>yarn.scheduler.capacity.root.support.user-limit-factor</name>  
+   <value>2</value>
+</property>
+
+<property>
+   <name>yarn.nodemanager.vmem-check-enabled</name>
+    <value>false</value>
+    <description>Whether virtual memory limits will be enforced for containers</description>
+  </property>
+ <property>
+   <name>yarn.nodemanager.vmem-pmem-ratio</name>
+    <value>4</value>
+    <description>Ratio between virtual memory to physical memory when setting memory limits for containers</description>
+  </property>
 </configuration>
 ```
 
@@ -139,7 +165,7 @@ sudo adduser hadoop sudo
 ```xml
 <configuration>
     <property>
-        <name>fs.default.name</name>
+        <name>fs.defaultFS</name>
         <value>hdfs://mi-msi:9000</value>
     </property>
 </configuration>
