@@ -12,6 +12,7 @@ Team **Scaladoop**:
 ## Table of Contents
 * [Introduction](#introduction)
 * [System description](#system-description)
+* [Private Network Hadoop Cluster Configuration](#hadoop-cluster)
 * [Conclusion](#conclusion)
 
 ## Introduction <a name="introduction"></a>
@@ -73,6 +74,8 @@ if (load_movie_preferences) {
       .collect()
       .toSeq
 ```
-
+## Private Network Hadoop Cluster Configuration <a name="hadoop-cluster"></a>
+1. Configuring hostnames
+<img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/local_net.png" />
 
 ## Conclusion <a name="conclusion"></a>
