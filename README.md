@@ -294,7 +294,7 @@ We tried different values of rank in the model:
 
 <img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/graph_rank_error.png"/>
 
-According to graph, models with rank higher 10 are overfitting. Model with rank 10 produces lowest error after training, therefore, 10 is the optimal value for rank.
+According to graph, models with rank higher 10 are overfitting. Model with rank 10 produces lowest error after training, therefore, 10 is the optimal value for rank. Nevertheless, any predictions are better than baseline (average movie rating).
 
 ## Conclusion <a name="conclusion"></a>
 Our team successfully implemented the movie reccomendation system and run it on 2 different computers as a hadoop cluster. We gained some more DevOps experience of deploying a cluster on real devices. We also practiced in ML by applying a new regressor model and fine-tuning it. Finally, we practiced Spark framework for Scala for writing machine learning programs.
