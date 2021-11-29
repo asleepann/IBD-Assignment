@@ -30,6 +30,7 @@ File *for_grading.tsv* contains names of films that will be suggested for user t
 ### Model Structure
 The program takes mentioned datasets to train an ALS regressor on them, and then predicts rating based on (filmId, userId).
 It is also possible to interact with the user, take films preferences from them, and then produce list of films that worth watching for that particular user. Grader class implements this behaviour.
+
 We also let the user choose: if load_movie_preferences is true, they are automatically read from user_ratings.tsv file. Otherwise, user is prompted to rate movies at the start of the program.
 ```scala
 if (load_movie_preferences) {
@@ -38,6 +39,11 @@ if (load_movie_preferences) {
       .map(field => (field(0).toInt, field(1).toDouble))
       .collect()
       .toSeq
+```
+Before traning, we filter out infrequent films, because predictions for them are too random:
+```scala
+val rareMoviesId = initRatingsData.map(_.product).countByValue().filter(_._2 < 50).keys.toSet
+val ratingsData = initRatingsData.filter(x => !rareMoviesId.contains(x.product))
 ```
 Prediction is made by ALS regressor, which uses matrix feature extraction to learn the pattern from training data.
 Prediction on a test set is made after learning, and root mean squred error (RMSE) is calculated to measure performance of the model:
@@ -107,19 +113,28 @@ start-yarn.sh
 ```
 Our cluster of VM's is working now.
 We can see there are 3 nodes running in distributed file system:
+
 <img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/vm-hdfs-3nodes.png"/>
+
 We uploaded all required data to the cluster then:
+
 <img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/vm-hdfs-files.png"/>
+
 Hadoop Cluster also shows 3 working nodes:
+
 <img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/vm-3node-working.png"/>
+
 Then, we execute the following command to submit a job to a cluster:
 ```bash
 spark-submit --master yarn spark-recommendation.jar hdfs:///movielens-mod -user false
 ```
 where *spark-recommendation.jar* is name of compiled job file.
 Job is successfully submitted to the cluster:
+
 <img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/vm-job-run.png"/>
+
 And also finished successfully, outputting the prediction:
+
 <img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/vm-job-result.png"/>
 
 ## Private Network Hadoop Cluster Configuration <a name="hadoop-cluster"></a>
