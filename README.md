@@ -155,7 +155,10 @@ sudo adduser hadoop sudo
 <img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/add_hadoop_user.png"/>
 
 3. Hadoop configuration files should contain the following config for both devices:
- 
+ <details>
+    <summary> a </summary>
+    a [1]
+ </details>
 * `yarn-site.xml`
 
 ```xml
