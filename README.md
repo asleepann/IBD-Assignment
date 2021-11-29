@@ -138,12 +138,14 @@ And also finished successfully, outputting the prediction:
 <img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/vm-job-result.png"/>
 
 ## Private Network Hadoop Cluster Configuration <a name="hadoop-cluster"></a>
-Steps of configuring local network for running our movie recommendation system on 2 computers both connnected to the same Wi-Fi:
-1. Configuring hostnames:
+One more step to a real cluster deployment is to try running cluster on 2 real machines.
+We connected 2 devices in the same private Wi-Fi network, so we have static IP's and devices can see each other.
+All of the following actions are done simultaneously on both cluster's devices.
+1. Configuring hostnames (to operate them instead of IP's):
 
 <img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/local_net.png"/>
 
-2. Add "hadoop" user to the system using the following commands:
+2. Add "hadoop" user to the system using the following commands. This user will communicate with hadoop:
 
 ```bash
 sudo useradd -m hadoop
@@ -152,7 +154,7 @@ sudo adduser hadoop sudo
 ```
 <img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/add_hadoop_user.png"/>
 
-3. Hadoop configuration files should contain the following:
+3. Hadoop configuration files should contain the following config for both devices:
  
 * `yarn-site.xml`
 
@@ -268,23 +270,27 @@ sudo adduser hadoop sudo
 hadoop@mi-msi
 hadoop@igudesman-2x
 ```
+Now, when everything is configured, we can run cluster with:
+```bash
+start-all.sh
+```
 
 4. The result of the command  `hdfs dfsadmin -report`
 
 <img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/hdfs_dfsadmin.png"/>
 
-HDFS is up on 2 hosts.
+HDFS is up with 2 hosts.
 
 5. We downloaded data into HDFS
 
 <img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/hdfs_download_data.png"/>
 
-6. We ran HDFS and YARN
+6. HDFS and YARN are up
 
 <img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/hd.png"/>
 <img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/ig.jpg"/>
 
-7. We started execution and got the following results for both modes (grader and non-grader)
+7. We started execution and got the following results for both modes (grader with user interaction and non-grader)
 
 <img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/res.png"/>
 <img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/res2.png"/>
