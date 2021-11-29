@@ -301,6 +301,6 @@ Our team successfully implemented the movie reccomendation system and run it on 
 
 ### What could done differently?
 There are a few points of further improvements:
-- a
-- b
-- c
+- Some Spark RDD operations could be done more efficiently. Improving them will let us understand MapReduce and Spark better, as well as train us as programmers.
+- Hyper-Parameters tuning could be done more extensively. By exploring ALS model we could achieve better results. Using cross-validation would also make our fine-tuning more precise.
+- We started deploying cluster separately, but the right way to do it is just to copy configuration from one device to another. The most perfect situation is to have several identical devices with same-preinstalled software, but this is real life :)
