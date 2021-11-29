@@ -297,4 +297,10 @@ We tried different values of rank in the model:
 According to graph, models with rank higher 10 are overfitting. Model with rank 10 produces lowest error after training, therefore, 10 is the optimal value for rank.
 
 ## Conclusion <a name="conclusion"></a>
-Our team successfully implemented the movie reccomendation system and run it on 2 different computers.
+Our team successfully implemented the movie reccomendation system and run it on 2 different computers as a hadoop cluster. We gained some more DevOps experience of deploying a cluster on real devices. We also practiced in ML by applying a new regressor model and fine-tuning it. Finally, we practiced Spark framework for Scala for writing machine learning programs.
+
+### What could done differently?
+There are a few points of further improvements:
+- a
+- b
+- c
