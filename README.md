@@ -21,14 +21,15 @@ Our team, Scaladoop, is going to implement a movie recommendation system that ca
 
 To practice not only machine learning with Scala, but also the use of distributed systems, we will run our model distributed on 2 different machines using Hadoop Cluster and Spark framework for Scala to speed up computations.
 
-This report covers all the steps that we performed and that lead us to a successful achievement of the goal.
+This report covers steps that we performed and that lead us to a successful achievement of the goal.
 
 ## System description <a name="system-description"></a>
-
-We were given part of the code, so we only list here important changes we applied.
-
-In general, the datasets with users, watched film and their rating is provided. System is to learn on this data and to predict rating for other users and films.
-
+### Datasets
+The dataset for training contains files *ratings2.csv* and *movies2.csv*. The first one contains information about how users rated files, and the second one stores mapping from movie id to movie string name.
+File *for_grading.tsv* contains names of films that will be suggested for user to grade manually, in order to recommend proper films based on training data.
+### Model Structure
+The program takes mentioned datasets to train an ALS regressor on them, and then predicts rating based on (filmId, userId).
+It is also possible to interact with the user, take films preferences from them, and then produce list of films that worth watching for that particular user. Grader class implements this behaviour.
 We also let the user choose: if load_movie_preferences is true, they are automatically read from user_ratings.tsv file. Otherwise, user is prompted to rate movies at the start of the program.
 ```scala
 if (load_movie_preferences) {
@@ -38,9 +39,18 @@ if (load_movie_preferences) {
       .collect()
       .toSeq
 ```
-
-
-We filter out films that user already watched, so they are not shown in recommendations:
+Prediction is made by ALS regressor, which uses matrix feature extraction to learn the pattern from training data.
+Prediction on a test set is made after learning, and root mean squred error (RMSE) is calculated to measure performance of the model:
+```scala
+def rmse(test: RDD[Rating], prediction: scala.collection.Map[Int, Double]) = {
+    val rating_pairs = test.map(x => (prediction.get(x.product), x.rating)).filter(_._1.isDefined).map(x => (x._1.get, x._2))
+    math.sqrt(rating_pairs
+      .map(x => (x._1 - x._2) * (x._1 - x._2))
+      // _ + _ is equivalent to the lambda (x,y) => x+y
+      .reduce(_ + _) / test.count())
+  }
+```
+Before outputting the result for the user, we filter out films that user already watched, so they are not shown in recommendations:
 ```scala
 println("Predictions for user with filtering\n")
       val already_watched = myRating.map(x => x.product).collect()
@@ -56,9 +66,7 @@ println("Predictions for user with filtering\n")
         // print title and predicted rating
         .foreach(x => println(s"${filmId2Title(x.product)}\t\t${x.rating}"))
 ```
-
-
-We also perform fine-tuning of parameters: we try different *rank* for our model to see what is the best. The best result is discussed at the end of the report.
+All of this was about a single test run of the system. We want to increase quality of our model, so we perform fine-tuning of parameters: we try different *rank* for our model to see what is the best:
 ```scala
 val ranks = Array(2, 5, 10, 20, 30, 40, 50, 60)
     var best_params = Array(10, Double.PositiveInfinity)
@@ -84,6 +92,11 @@ val ranks = Array(2, 5, 10, 20, 30, 40, 50, 60)
       println("\n")
     }
 ```
+This project was compiled by running the following command in the project root:
+```bash
+sbt package
+```
+This creates .jar file that can be submitted to a configured spark cluster.
 ## Local Multiple-VM Cluster Run
 On labs each of us configured local cluster with 3 virtual machines, so we do not provide detailed configuration here.
 
