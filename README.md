@@ -154,11 +154,12 @@ sudo adduser hadoop sudo
 ```
 <img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/add_hadoop_user.png"/>
 
-3. Hadoop configuration files should contain the following config for both devices:
- <details>
-    <summary> a </summary>
-    a [1]
- </details>
+3. Computers need to have passphraseless ssh between each other to communicate within a cluster. We add public key of another server to each server by means of:
+```bash
+ssh-copy-id -i /home/hadoop/.ssh/id_rsa.pub hadoop@{mi-msi,igudesman-2x}
+```
+
+4. Hadoop configuration files should contain the following config for both devices:
 * `yarn-site.xml`
 
 ```xml
@@ -278,22 +279,22 @@ Now, when everything is configured, we can run cluster with:
 start-all.sh
 ```
 
-4. The result of the command  `hdfs dfsadmin -report`
+5. The result of the command  `hdfs dfsadmin -report`
 
 <img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/hdfs_dfsadmin.png"/>
 
 HDFS is up with 2 hosts.
 
-5. We downloaded data into HDFS
+6. We downloaded data into HDFS
 
 <img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/hdfs_download_data.png"/>
 
-6. HDFS and YARN are up
+7. HDFS and YARN are up
 
 <img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/hd.png"/>
 <img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/ig.jpg"/>
 
-7. We started execution and got the following results for both modes (grader with user interaction and non-grader)
+8. We started execution and got the following results for both modes (grader with user interaction and non-grader)
 
 <img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/res.png"/>
 <img src="https://github.com/asleepann/IBD-Assignment/blob/main/images-for-report/res2.png"/>
